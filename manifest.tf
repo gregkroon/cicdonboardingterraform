@@ -19,7 +19,56 @@ resource "harness_platform_project" "project" {
   description = "Example project description"
 }
 
+resource "harness_platform_service" "example" {
+  identifier  = var.HARNESS_PROJECT_ID
+  name        = var.HARNESS_PROJECT_ID
+  description = "test"
+  org_id      = "default"
+  project_id  = var.HARNESS_PROJECT_ID
 
+  ## SERVICE V2 UPDATE
+  ## We now take in a YAML that can define the service definition for a given Service
+  ## It isn't mandatory for Service creation 
+  ## It is mandatory for Service use in a pipeline
+
+yaml = <<-EOT
+service:
+  name: "${var.project_id}"
+  identifier: "${var.project_id}"
+  orgIdentifier: default
+  projectIdentifier: "${var.project_id}"
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: "${var.project_id}"
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: account.Github
+                  gitFetchType: Branch
+                  paths:
+                    - deployment.yaml
+                  repoName: "${var.project_id}"
+                  branch: main
+              valuesPaths:
+                - values.yaml
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+      artifacts:
+        primary:
+          spec:
+            connectorRef: account.dockerhubkroon
+            imagePath: munkys123/kotlin
+            tag: latest
+            digest: ""
+          type: DockerRegistry
+      type: Kubernetes
+EOT
+}
 
 
 
