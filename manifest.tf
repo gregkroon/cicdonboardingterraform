@@ -20,6 +20,7 @@ resource "harness_platform_project" "project" {
 }
 
 resource "harness_platform_service" "example" {
+  depends_on = [harness_platform_project.project]
   identifier  = var.HARNESS_PROJECT_ID
   name        = var.HARNESS_PROJECT_ID
   description = "test"
