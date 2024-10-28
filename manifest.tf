@@ -33,16 +33,16 @@ resource "harness_platform_service" "example" {
 
 yaml = <<-EOT
 service:
-  name: "${var.project_id}"
-  identifier: "${var.project_id}"
+  name: ${var.HARNESS_PROJECT_ID}
+  identifier: ${var.HARNESS_PROJECT_ID}
   orgIdentifier: default
-  projectIdentifier: "${var.project_id}"
+  projectIdentifier: ${var.HARNESS_PROJECT_ID}
   serviceDefinition:
     type: Kubernetes
     spec:
       manifests:
         - manifest:
-            identifier: "${var.project_id}"
+            identifier: ${var.HARNESS_PROJECT_ID}
             type: K8sManifest
             spec:
               store:
@@ -52,7 +52,7 @@ service:
                   gitFetchType: Branch
                   paths:
                     - deployment.yaml
-                  repoName: "${var.project_id}"
+                  repoName: ${var.HARNESS_PROJECT_ID}
                   branch: main
               valuesPaths:
                 - values.yaml
