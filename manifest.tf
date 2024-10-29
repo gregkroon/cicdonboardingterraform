@@ -99,7 +99,7 @@ resource "harness_platform_infrastructure" "example" {
     deploymentType: Kubernetes
     type: KubernetesDirect
     spec:
-      connectorRef: account.kotlindev
+      connectorRef: account.developmentcluster
       namespace: default
       releaseName: release-<+INFRA_KEY_SHORT_ID>
     allowSimultaneousDeployments: false
