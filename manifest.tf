@@ -85,8 +85,8 @@ resource "harness_platform_environment" "example" {
 
   yaml = <<-EOT
   environment:
-    name: name
-    identifier: identifier
+    name: Development
+    identifier: Development
     tags: {}
     type: PreProduction
   EOT
