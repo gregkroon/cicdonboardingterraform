@@ -110,10 +110,10 @@ resource "harness_platform_pipeline" "example" {
 
   depends_on = [harness_platform_project.project]
   
-  identifier = var.HARNESS_PROJECT_IDpipeline
+  identifier = var.HARNESS_PROJECT_ID
   org_id     = "default"
   project_id = var.HARNESS_PROJECT_ID
-  name       = var.HARNESS_PROJECT_IDpipeline
+  name       = var.HARNESS_PROJECT_ID
   git_details {
     branch_name    = "main"
     commit_message = "commitMessage"
@@ -124,8 +124,8 @@ resource "harness_platform_pipeline" "example" {
   }
 yaml = <<-EOF
 pipeline:
-  name: ${var.HARNESS_PROJECT_ID}pipeline
-  identifier: ${var.HARNESS_PROJECT_ID}pipeline
+  name: ${var.HARNESS_PROJECT_ID}
+  identifier: ${var.HARNESS_PROJECT_ID}
   allowStageExecutions: false
   projectIdentifier: ${var.HARNESS_PROJECT_ID}
   orgIdentifier: default
