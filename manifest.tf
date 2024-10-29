@@ -72,11 +72,10 @@ EOT
 }
 
 resource "harness_platform_environment" "example" {
-  identifier = "Developement"
-  name       = "Developement"
-  org_id     = "default"
-  project_id = ${var.HARNESS_PROJECT_ID}
-  tags       = ["foo:bar", "bar:foo"]
-  type       = "PreProduction"
-  description = "env description"
+  depends_on   = [harness_platform_project.project]
+  identifier   = "Development"
+  name         = "Development"
+  org_id       = "default"
+  project_id   = "pexa"
+  type         = "PreProduction"
 }
