@@ -94,7 +94,7 @@ resource "harness_platform_infrastructure" "example" {
     name: Developmentcluster
     identifier: Developmentcluster
     orgIdentifier: default
-    projectIdentifier: petclinicnew
+    projectIdentifier: var.HARNESS_PROJECT_ID
     environmentRef: Development
     deploymentType: Kubernetes
     type: KubernetesDirect
