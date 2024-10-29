@@ -217,7 +217,7 @@ pipeline:
                       digest: ""
                     type: DockerRegistry
           infrastructure:
-            environmentRef: dev
+            environmentRef: Development
             infrastructureDefinition:
               type: KubernetesDirect
               spec:
