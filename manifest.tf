@@ -24,7 +24,7 @@ resource "harness_platform_service" "example" {
   identifier  = var.HARNESS_PROJECT_ID
   name        = var.HARNESS_PROJECT_ID
   description = "test"
-  org_id      = "default"
+  org_id      = var.HARNESS_ORG_ID
   project_id  = var.HARNESS_PROJECT_ID
 
   ## SERVICE V2 UPDATE
@@ -36,7 +36,7 @@ yaml = <<-EOT
 service:
   name: ${var.HARNESS_PROJECT_ID}
   identifier: ${var.HARNESS_PROJECT_ID}
-  orgIdentifier: default
+  orgIdentifier: ${var.HARNESS_ORG_ID}
   projectIdentifier: ${var.HARNESS_PROJECT_ID}
   serviceDefinition:
     type: Kubernetes
@@ -75,7 +75,7 @@ resource "harness_platform_environment" "example" {
   depends_on   = [harness_platform_project.project]
   identifier   = "Development"
   name         = "Development"
-  org_id       = "default"
+  org_id       = var.HARNESS_ORG_ID
   project_id   = var.HARNESS_PROJECT_ID
   type         = "PreProduction"
 }
@@ -84,7 +84,7 @@ resource "harness_platform_infrastructure" "example" {
   depends_on   = [harness_platform_environment.example]
   identifier      = "Developmentcluster"
   name            = "Developmentcluster"
-  org_id          = "default"
+  org_id          = ${var.HARNESS_ORG_ID}
   project_id      = var.HARNESS_PROJECT_ID
   env_id          = "Development"
   type            = "KubernetesDirect"
@@ -111,7 +111,7 @@ resource "harness_platform_pipeline" "example" {
   depends_on = [harness_platform_infrastructure.example]
   
   identifier = var.HARNESS_PROJECT_ID
-  org_id     = "default"
+  org_id     = var.HARNESS_ORG_ID
   project_id = var.HARNESS_PROJECT_ID
   name       = var.HARNESS_PROJECT_ID
   git_details {
@@ -128,7 +128,7 @@ pipeline:
   identifier: ${var.HARNESS_PROJECT_ID}
   allowStageExecutions: false
   projectIdentifier: ${var.HARNESS_PROJECT_ID}
-  orgIdentifier: default
+  orgIdentifier: ${var.HARNESS_ORG_ID}
   tags: {}
   stages:
     - stage:
