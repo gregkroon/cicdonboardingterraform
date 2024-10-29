@@ -186,7 +186,7 @@ pipeline:
         type: Deployment
         spec:
           serviceConfig:
-            serviceRef: petclinic
+            serviceRef: petclinicnew
             serviceDefinition:
               type: Kubernetes
               spec:
