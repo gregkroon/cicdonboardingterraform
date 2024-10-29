@@ -79,3 +79,31 @@ resource "harness_platform_environment" "example" {
   project_id   = var.HARNESS_PROJECT_ID
   type         = "PreProduction"
 }
+
+resource "harness_platform_infrastructure" "example" {
+  identifier      = Developmentcluster
+  name            = Developmentcluster
+  org_id          = default
+  project_id      = var.HARNESS_PROJECT_ID
+  env_id          = Development
+  type            = "KubernetesDirect"
+  deployment_type = "Kubernetes"
+  yaml            = <<-EOT
+        infrastructureDefinition:
+         name: name
+         identifier: identifier
+         description: ""
+         tags:
+           asda: ""
+         orgIdentifier: orgIdentifer
+         projectIdentifier: projectIdentifier
+         environmentRef: environmentIdentifier
+         deploymentType: Kubernetes
+         type: KubernetesDirect
+         spec:
+          connectorRef: account.gfgf
+          namespace: asdasdsa
+          releaseName: release-<+INFRA_KEY>
+          allowSimultaneousDeployments: false
+      EOT
+}
