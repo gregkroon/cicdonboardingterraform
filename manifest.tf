@@ -85,7 +85,7 @@ resource "harness_platform_infrastructure" "example" {
   identifier      = "Developmentcluster"
   name            = "Developmentcluster"
   org_id          = "default"
-  project_id      = var.HARNESS_PROJECT_ID
+  project_id      = ${var.HARNESS_PROJECT_ID}
   env_id          = "Development"
   type            = "KubernetesDirect"
   deployment_type = "Kubernetes"
