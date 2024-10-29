@@ -73,11 +73,10 @@ EOT
 
 resource "harness_platform_environment" "example" {
   depends_on = [harness_platform_project.project]
-  identifier = "identifier"
-  name       = "name"
-  org_id     = "org_id"
-  project_id = "project_id"
-  tags       = ["foo:bar", "bar:foo"]
+  identifier = "Development"
+  name       = "Development"
+  org_id     = "default"
+  project_id = ${var.HARNESS_PROJECT_ID}
   type       = "PreProduction"
   description = "env description"
 
