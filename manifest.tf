@@ -110,24 +110,24 @@ resource "harness_platform_pipeline" "example" {
 
   depends_on = [harness_platform_project.project]
   
-  identifier = var.pipeline_identifier
+  identifier = var.HARNESS_PROJECT_IDpipeline
   org_id     = "default"
-  project_id = var.project_id
-  name       = var.pipeline_identifier
+  project_id = var.HARNESS_PROJECT_ID
+  name       = var.HARNESS_PROJECT_IDpipeline
   git_details {
     branch_name    = "main"
     commit_message = "commitMessage"
     #file_path      = ${var.project_id
     connector_ref  = "account.Github"
     store_type     = "INLINE"
-    repo_name      = var.project_id
+    repo_name      = var.HARNESS_PROJECT_ID
   }
 yaml = <<-EOF
 pipeline:
-  name: ${var.pipeline_identifier}
-  identifier: ${var.pipeline_identifier}
+  name: ${var.HARNESS_PROJECT_ID}pipeline
+  identifier: ${var.HARNESS_PROJECT_ID}pipeline
   allowStageExecutions: false
-  projectIdentifier: ${var.project_id}
+  projectIdentifier: ${var.HARNESS_PROJECT_ID}
   orgIdentifier: default
   tags: {}
   stages:
