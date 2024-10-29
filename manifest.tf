@@ -108,7 +108,7 @@ resource "harness_platform_infrastructure" "example" {
 
 resource "harness_platform_pipeline" "example" {
 
-  depends_on = [harness_platform_project.project]
+  depends_on = [harness_platform_infrastructure.example]
   
   identifier = var.HARNESS_PROJECT_ID
   org_id     = "default"
