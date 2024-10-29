@@ -72,6 +72,7 @@ EOT
 }
 
 resource "harness_platform_environment" "example" {
+  depends_on = [harness_platform_project.project]
   identifier = "identifier"
   name       = "name"
   org_id     = "org_id"
