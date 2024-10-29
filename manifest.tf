@@ -70,3 +70,27 @@ service:
       type: Kubernetes
 EOT
 }
+
+resource "harness_platform_environment" "example" {
+  identifier = "identifier"
+  name       = "name"
+  org_id     = "org_id"
+  project_id = "project_id"
+  tags       = ["foo:bar", "bar:foo"]
+  type       = "PreProduction"
+  description = "env description"
+
+  ## ENVIRONMENT V2 Update
+  ## The YAML is needed if you want to define the Environment Variables and Overrides for the environment
+  ## Not Mandatory for Environment Creation nor Pipeline Usage
+
+  yaml = <<-EOT
+  environment:
+    name: Development
+    identifier: Development
+    tags: {}
+    type: PreProduction
+    orgIdentifier: default
+    projectIdentifier: ${var.HARNESS_PROJECT_ID}
+  EOT
+}
