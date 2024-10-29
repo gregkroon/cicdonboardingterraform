@@ -86,6 +86,8 @@ resource "harness_platform_infrastructure" "example" {
   org_id          = "default"
   project_id      = var.HARNESS_PROJECT_ID
   env_id          = "Development"
+  type            = "KubernetesDirect"
+  deployment_type = "Kubernetes"
   yaml            = <<-EOT
         infrastructureDefinition:
          name: name
