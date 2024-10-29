@@ -90,21 +90,18 @@ resource "harness_platform_infrastructure" "example" {
   type            = "KubernetesDirect"
   deployment_type = "Kubernetes"
   yaml            = <<-EOT
-        infrastructureDefinition:
-         name: name
-         identifier: identifier
-         description: ""
-         tags:
-           asda: ""
-         orgIdentifier: orgIdentifer
-         projectIdentifier: projectIdentifier
-         environmentRef: environmentIdentifier
-         deploymentType: Kubernetes
-         type: KubernetesDirect
-         spec:
-          connectorRef: account.gfgf
-          namespace: asdasdsa
-          releaseName: release-<+INFRA_KEY>
-          allowSimultaneousDeployments: false
-      EOT
+  infrastructureDefinition:
+    name: Developmentcluster
+    identifier: Developmentcluster
+    orgIdentifier: default
+    projectIdentifier: petclinicnew
+    environmentRef: Development
+    deploymentType: Kubernetes
+    type: KubernetesDirect
+    spec:
+      connectorRef: account.kotlindev
+      namespace: default
+      releaseName: release-<+INFRA_KEY_SHORT_ID>
+    allowSimultaneousDeployments: false
+  EOT
 }
