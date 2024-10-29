@@ -76,7 +76,7 @@ resource "harness_platform_environment" "example" {
   identifier = "Development"
   name       = "Development"
   org_id     = "default"
-  project_id = ${var.HARNESS_PROJECT_ID}
+  project_id = var.HARNESS_PROJECT_ID
   type       = "PreProduction"
 
   ## ENVIRONMENT V2 Update
