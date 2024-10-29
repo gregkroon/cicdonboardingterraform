@@ -81,6 +81,7 @@ resource "harness_platform_environment" "example" {
 }
 
 resource "harness_platform_infrastructure" "example" {
+  depends_on   = [harness_platform_project.project]
   identifier      = "Developmentcluster"
   name            = "Developmentcluster"
   org_id          = "default"
