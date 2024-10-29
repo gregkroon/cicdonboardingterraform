@@ -84,7 +84,7 @@ resource "harness_platform_infrastructure" "example" {
   depends_on   = [harness_platform_environment.example]
   identifier      = "Developmentcluster"
   name            = "Developmentcluster"
-  org_id          = ${var.HARNESS_ORG_ID}
+  org_id          =  var.HARNESS_ORG_ID
   project_id      = var.HARNESS_PROJECT_ID
   env_id          = "Development"
   type            = "KubernetesDirect"
