@@ -91,6 +91,6 @@ resource "harness_platform_environment" "example" {
     tags: {}
     type: PreProduction
     orgIdentifier: default
-    projectIdentifier: ${var.HARNESS_PROJECT_ID}
+    projectIdentifier: var.HARNESS_PROJECT_ID
   EOT
 }
