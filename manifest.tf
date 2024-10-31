@@ -62,11 +62,12 @@ service:
       artifacts:
         primary:
           spec:
-            connectorRef: account.dockerhubkroon
-            imagePath: munkys123/kotlin
-            tag: latest
+            connectorRef: account.awskey
+            imagePath: kotlin
+            tag: <+pipeline.stages.Build.spec.execution.steps.BuildAndPushDockerRegistry.artifact_BuildAndPushDockerRegistry.stepArtifacts.publishedImageArtifacts[0].tag>
             digest: ""
-          type: DockerRegistry
+            region: ap-southeast-2
+          type: Ecr
       type: Kubernetes
 EOT
 }
