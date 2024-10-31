@@ -158,25 +158,17 @@ pipeline:
                     image: gradle:jdk17
                     shell: Sh
                     command: ./gradlew test
+                  when:
+                    stageStatus: Success
               - step:
-                  type: Run
-                  name: build
-                  identifier: build
+                  type: BuildAndPushECR
+                  name: BuildAndPushECR
+                  identifier: BuildAndPushECR
                   spec:
-                    connectorRef: account.harnessImage
-                    image: gradle:jdk17
-                    shell: Bash
-                    command: |-
-                      #./gradlew build
-
-                      ls -la
-              - step:
-                  type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry
-                  identifier: BuildAndPushDockerRegistry
-                  spec:
-                    connectorRef: account.dockerhubkroon
-                    repo: munkys123/kotlin
+                    connectorRef: account.awskey
+                    region: ap-southeast-2
+                    account: "759984737373"
+                    imageName: 759984737373.dkr.ecr.ap-southeast-2.amazonaws.com/kotlin
                     tags:
                       - <+pipeline.sequenceId>
                     caching: true
@@ -212,11 +204,12 @@ pipeline:
                 artifacts:
                   primary:
                     spec:
-                      connectorRef: account.dockerhubkroon
-                      imagePath: munkys123/kotlin
-                      tag: <+pipeline.stages.Build.spec.execution.steps.BuildAndPushDockerRegistry.artifact_BuildAndPushDockerRegistry.stepArtifacts.publishedImageArtifacts[0].tag>
+                      connectorRef: account.awskey
+                      imagePath: kotlin
+                      tag: <+pipeline.stages.Build.spec.execution.steps.BuildAndPushECR.artifact_BuildAndPushECR.stepArtifacts.publishedImageArtifacts[0].tag>
                       digest: ""
-                    type: DockerRegistry
+                      region: ap-southeast-2
+                    type: Ecr
           infrastructure:
             environmentRef: Development
             infrastructureDefinition:
@@ -290,6 +283,5 @@ pipeline:
         repoName: spring-petclinic-kotlin
         build: <+input>
         sparseCheckout: []
-
 EOF
 }
