@@ -288,3 +288,36 @@ pipeline:
         sparseCheckout: []
 EOF
 }
+
+# Define the webhook trigger
+resource "harness_platform_trigger" "webhook_trigger" {
+  identifier  = "pr_closed_main_trigger"
+  name        = "PR Closed on Main"
+  description = "Trigger pipeline on closed pull requests targeting main"
+  org_id      = var.HARNESS_ORG_ID
+  project_id  = var.HARNESS_PROJECT_ID
+  pipeline_id = var.HARNESS_PIPELINE_ID
+
+  # Set the trigger condition
+  condition {
+    type = "OnWebhook"
+    spec {
+      payload_conditions = {
+        "action"      = "closed"            # Only triggers when the PR action is "closed"
+        "merged"      = "true"              # Ensures the PR is merged, not just closed
+        "base.ref"    = "refs/heads/main"   # Target branch is "main"
+      }
+    }
+  }
+
+  # Define the action to trigger the pipeline when the condition is met
+  action {
+    type = "Pipeline"
+    spec {
+      pipeline {
+        identifier = var.HARNESS_PIPELINE_ID
+        input_set_references = []
+      }
+    }
+  }
+}
