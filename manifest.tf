@@ -289,3 +289,72 @@ pipeline:
 EOF
 }
 
+trigger:
+  name: PR trigger
+  identifier: PR_trigger
+  enabled: true
+  encryptedWebhookSecretIdentifier: ""
+  description: ""
+  tags: {}
+  orgIdentifier: default
+  stagesToExecute: []
+  projectIdentifier: petclinicnew
+  pipelineIdentifier: petclinicnew
+  source:
+    type: Webhook
+    spec:
+      type: Github
+      spec:
+        type: PullRequest
+        spec:
+          connectorRef: account.Github
+          autoAbortPreviousExecutions: false
+          payloadConditions:
+            - key: targetBranch
+              operator: Equals
+              value: main
+          headerConditions: []
+          repoName: petclinicnew
+          actions:
+            - Close
+
+
+
+
+resource "harness_platform_triggers" "example" {
+  identifier = var.HARNESS_PROJECT_ID
+  org_id     = var.HARNESS_ORG_ID
+  project_id = var.HARNESS_PROJECT_ID
+  name       = var.HARNESS_PROJECT_ID
+  target_id  = var.HARNESS_PROJECT_ID
+  yaml       = <<-EOT
+trigger:
+  name: PR trigger
+  identifier: PR_trigger
+  enabled: true
+  encryptedWebhookSecretIdentifier: ""
+  description: ""
+  tags: {}
+  orgIdentifier: default
+  stagesToExecute: []
+  projectIdentifier: ${var.HARNESS_PROJECT_ID}
+  pipelineIdentifier:${var.HARNESS_PROJECT_ID}
+  source:
+    type: Webhook
+    spec:
+      type: Github
+      spec:
+        type: PullRequest
+        spec:
+          connectorRef: account.Github
+          autoAbortPreviousExecutions: false
+          payloadConditions:
+            - key: targetBranch
+              operator: Equals
+              value: main
+          headerConditions: []
+          repoName: ${var.HARNESS_PROJECT_ID}
+          actions:
+            - Close
+  EOT
+  }   
