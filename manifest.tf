@@ -289,7 +289,7 @@ pipeline:
 EOF
 }
 
- Define the webhook trigger
+# Define the webhook trigger
 resource "harness_platform_triggers" "pr_closed_main_trigger" {
   identifier  = "pr_closed_main_trigger"
   name        = "PR Closed on Main"
