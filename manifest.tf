@@ -289,28 +289,42 @@ pipeline:
 EOF
 }
 
-# Define the webhook trigger
-resource "harness_platform_trigger" "webhook_trigger" {
+ Define the webhook trigger
+resource "harness_platform_triggers" "pr_closed_main_trigger" {
   identifier  = "pr_closed_main_trigger"
   name        = "PR Closed on Main"
   description = "Trigger pipeline on closed pull requests targeting main"
   org_id      = var.HARNESS_ORG_ID
   project_id  = var.HARNESS_PROJECT_ID
-  pipeline_id = var.HARNESS_PIPELINE_ID
+  target      = var.HARNESS_PIPELINE_ID
+  target_type = "Pipeline"
 
-  # Set the trigger condition
-  condition {
-    type = "OnWebhook"
+  # Define source for the webhook
+  source {
+    type = "Webhook"
     spec {
-      payload_conditions = {
-        "action"      = "closed"            # Only triggers when the PR action is "closed"
-        "merged"      = "true"              # Ensures the PR is merged, not just closed
-        "base.ref"    = "refs/heads/main"   # Target branch is "main"
+      type = "Github"
+      spec {
+        connector_ref = var.GITHUB_CONNECTOR_REF  # Define the GitHub connector in Harness
+        auto_abort_previous_executions = true
+        payload_conditions {
+          key    = "action"
+          value  = "closed"                # Only trigger when the PR action is "closed"
+        }
+        payload_conditions {
+          key    = "pull_request.merged"
+          value  = "true"                  # Only trigger if the PR is merged
+        }
+        header_conditions {
+          key    = "base.ref"
+          operator = "Equals"
+          value  = "refs/heads/main"       # Target branch is "main"
+        }
       }
     }
   }
 
-  # Define the action to trigger the pipeline when the condition is met
+  # Define the action to execute the pipeline
   action {
     type = "Pipeline"
     spec {
