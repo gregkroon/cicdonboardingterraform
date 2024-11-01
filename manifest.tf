@@ -281,7 +281,10 @@ pipeline:
       codebase:
         connectorRef: account.Github
         repoName: spring-petclinic-kotlin
-        build: <+input>
+        build:
+          type: branch
+          spec:
+            branch: main
         sparseCheckout: []
 EOF
 }
