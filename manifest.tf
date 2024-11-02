@@ -307,7 +307,7 @@ trigger:
   orgIdentifier: default
   stagesToExecute: []
   projectIdentifier: ${var.HARNESS_PROJECT_ID}
-  pipelineIdentifier:${var.HARNESS_PROJECT_ID}
+  pipelineIdentifier: ${var.HARNESS_PROJECT_ID}
   source:
     type: Webhook
     spec:
