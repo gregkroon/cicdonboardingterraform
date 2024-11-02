@@ -291,6 +291,9 @@ EOF
 
 
 resource "harness_platform_triggers" "example" {
+
+depends_on = [harness_platform_pipeline.example]
+
   identifier = var.HARNESS_PROJECT_ID
   org_id     = var.HARNESS_ORG_ID
   project_id = var.HARNESS_PROJECT_ID
