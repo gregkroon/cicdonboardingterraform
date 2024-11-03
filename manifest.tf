@@ -195,7 +195,7 @@ pipeline:
                             gitFetchType: Branch
                             paths:
                               - deployment.yaml
-                            repoName: spring-petclinic-kotlin
+                            repoName: ${var.HARNESS_PROJECT_ID}
                             branch: main
                         valuesPaths:
                           - values.yaml
