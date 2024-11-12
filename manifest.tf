@@ -179,7 +179,7 @@ pipeline:
         type: Deployment
         spec:
           serviceConfig:
-            serviceRef: petclinicnew
+            serviceRef: ${var.HARNESS_PROJECT_ID}
             serviceDefinition:
               type: Kubernetes
               spec:
